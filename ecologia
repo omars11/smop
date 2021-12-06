@@ -1,0 +1,19 @@
+close all; clear all; clc 
+Z95=1.96; Z99=2.58; % Niveles de confianza
+p=0.5; % Prevalencia; 
+q=1-p; % Complemento de q
+i=0.15; % Error permitido del estudio 15%
+% Tamaño de la población ingresada por el usuario
+P=input('Escribe el tamaño de la población: ');
+for N=1:P 
+n95(N)=(Z95^2*N*p*q)/(i^2*(N-1)+Z95^2*p*q); 
+n99(N)=(Z99^2*N*p*q)/(i^2*(N-1)+Z99^2*p*q); 
+end
+N=1:P; 
+plot(N,n99,N,n95, 'linewidth', 5); grid on
+xlabel('Población, N'); ylabel('Tamaño de la muestra, n') 
+legend('Confianza = 99%','Confianza = 95%') 
+px=input('Tamaño de la población para conocer tamano de muestras: ');
+display('El tamaño de la muestra es:') 
+display('Para un 95% confianza'); n95(px) 
+display('Para un 99% confianza'); n99(px)
